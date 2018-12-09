@@ -1,0 +1,44 @@
+PROJECT STATUS: complete
+
+
+Contained in this directory is code for simulating the n-body problem using the 
+barnes-hut tree algorithm.The barnes hut cuda code is loosely based on the openCL code by Benjamin Neukom https://github.com/bneukom/gpu-nbody and the paper "An Efficient CUDA Implementation of the 
+Tree-Based Barnes Hut n-Body Algorithm" by Martin Burtscher and Keshav Pingali.
+
+
+*****************************************
+         Dependencies
+*****************************************
+
+This software requires the Nvidia CUDA toolkit installed on a system with a CUDA capable device 
+(gcc must also be installed).To install CUDA see https://developer.nvidia.com/cuda-downloads and the CUDA Quick Start Guide. 
+
+
+
+*****************************************
+               Compiling
+***************************************** 
+
+Before compiling see notes below. To compile the code simply type in a terminal:
+
+make clean
+make build
+
+
+
+*****************************************
+              Running        
+*****************************************
+
+To run the barnes-hut algorithm with benchmarks for 500 iterations, simply type:
+
+./main -barnes-hut -benchmark -iterations=500
+
+*****************************************
+             Notes
+*****************************************
+
+Currently you must manually set the number of particles (numbodies) in main.cpp and then ensure that 
+the blockSize variable in kernels.cu and the blockSize and gridSize variables in particle_cuda.cu 
+matches. For example if you set numbodies = 64*64 in main.cpp, then you must also set blockSize = 64 in 
+kernels.cu, and blockSize = 64, gridSize = 64, in particle_cuda.cu. 
